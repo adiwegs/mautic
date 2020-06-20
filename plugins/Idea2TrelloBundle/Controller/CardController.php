@@ -84,8 +84,6 @@ class CardController extends FormController
         $form = $this->getForm();
 
         if ($this->isFormCancelled($form)) {
-            $this->logger->warning('form cancelled');
-
             return $this->closeModal();
         }
 
@@ -97,7 +95,6 @@ class CardController extends FormController
             $invalid = current($newCard->listInvalidProperties());
             $message = sprintf('New card data not valid: %s', $invalid);
             // $this->addFlash($message, array(), 'error');
-            $this->logger->warning($message);
 
             return new JsonResponse(['error' => $message]);
         }
@@ -106,7 +103,6 @@ class CardController extends FormController
         $cardArray = json_decode($newCard->__toString(), true);
         // remove other values from array, only leave id
         $cardArray['idList'] = $form->get('idList')->getData()->getId();
-        $this->logger->warning('cardArray', $cardArray);
 
         return $this->postNewCard($cardArray);
     }
@@ -139,7 +135,6 @@ class CardController extends FormController
             //     'leadId'       => $leadId,
             // ]
         );
-        $this->logger->warning('action', [$action]);
 
         return $form = $this->createForm(NewCardType::class, $card, ['action' => $action]);
     }
@@ -152,11 +147,11 @@ class CardController extends FormController
     protected function postNewCard(array $card)
     {
         $api = $this->apiService->getApi();
-        $this->logger->warning('writing valid card to api', $card);
+        $this->logger->debug('writing valid card to api', $card);
 
         try {
             $card = $api->addCard($card);
-            $this->logger->warning('Successfully posted card to Trello', [$card->getId(), $card->getName()]);
+            $this->logger->debug('Successfully posted card to Trello', [$card->getId(), $card->getName()]);
 
             return $this->closeModal($card);
         } catch (InvalidArgumentException $e) {
@@ -214,10 +209,8 @@ class CardController extends FormController
 
     /**
      * Set the default values for the new card.
-     *
-     * @return NewCard
      */
-    protected function getTrelloData(Lead $contact)
+    protected function getTrelloData(Lead $contact): NewCard
     {
         // $desc = array('Contact:', $contact->getEmail(), $contact->getPhone(), $contact->getMobile());
 

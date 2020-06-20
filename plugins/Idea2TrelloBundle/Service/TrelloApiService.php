@@ -83,10 +83,8 @@ class TrelloApiService
      * Get all the lists on the Trello board.
      *
      * @param int $boardId
-     *
-     * @return array
      */
-    public function getListsOnBoard(int $boardId = null)
+    public function getListsOnBoard(int $boardId = null): array
     {
         $api = $this->getApi();
 

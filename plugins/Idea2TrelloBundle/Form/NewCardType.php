@@ -47,13 +47,12 @@ class NewCardType extends AbstractType
     /**
      * Define fields to display.
      *
+     * @todo inform user if no list was found (no board set)
+     *
      * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        // $builder->addEventSubscriber(new CleanFormSubscriber(['text' => 'html']));
-        // $builder->addEventSubscriber(new FormExitSubscriber('lead.note', $options));
-
         $builder
             ->add('name', TextType::class, [
                 'label'      => 'mautic.idea2trello.name',
