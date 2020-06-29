@@ -75,7 +75,6 @@
 !/media/images/.htaccess
 
 /plugins/*
-!/plugins/Idea2TrelloBundle
 !/plugins/MauticCitrixBundle
 !/plugins/MauticClearbitBundle
 !/plugins/MauticCloudStorageBundle
