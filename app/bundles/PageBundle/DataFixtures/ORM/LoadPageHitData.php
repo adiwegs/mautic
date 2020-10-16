@@ -40,8 +40,16 @@ class LoadPageHitData extends AbstractFixture implements OrderedFixtureInterface
             foreach ($rows as $col => $val) {
                 if ('NULL' != $val) {
                     $setter = 'set'.ucfirst($col);
-                    if (in_array($col, ['page', 'ipAddress'])) {
-                        $hit->$setter($this->getReference($col.'-'.$val));
+                    if (in_array($col, ['page', 'ipAddress','lead'])) {
+                        if ('lead' === $col) {
+                            // For some reason the lead must be linked with id - 1
+                            $entity = $this->getReference($col.'-'.($val - 1));
+                        } else {
+                            $entity = $this->getReference($col.'-'.$val);
+                        }
+                            
+                        $hit->$setter($entity);
+
                     } elseif (in_array($col, ['dateHit', 'dateLeft'])) {
                         $hit->$setter(new \DateTime($val));
                     } elseif ('browserLanguages' == $col) {
