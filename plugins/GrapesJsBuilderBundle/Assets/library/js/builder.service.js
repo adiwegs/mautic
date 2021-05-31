@@ -3,6 +3,7 @@ import grapesjsmjml from 'grapesjs-mjml';
 import grapesjsnewsletter from 'grapesjs-preset-newsletter';
 import grapesjswebpage from 'grapesjs-preset-webpage';
 import grapesjspostcss from 'grapesjs-parser-postcss';
+import grapesjscomponentcodeeditor from 'grapesjs-component-code-editor';
 import grapesjsmautic from '../../../../../../grapesjs-preset-mautic/src';
 // import grapesjsmautic from 'grapesjs-preset-mautic';
 import ContentService from './content.service';
@@ -150,7 +151,7 @@ export default class BuilderService {
       styleManager: {
         clearProperties: true, // Temp fix https://github.com/artf/grapesjs-preset-webpage/issues/27
       },
-      plugins: [grapesjswebpage, grapesjspostcss, grapesjsmautic],
+      plugins: [grapesjswebpage, grapesjspostcss, grapesjsmautic, grapesjscomponentcodeeditor],
       pluginsOpts: {
         [grapesjswebpage]: {
           formsOpts: false,
@@ -172,7 +173,7 @@ export default class BuilderService {
       storageManager: false,
       assetManager: this.getAssetManagerConf(),
 
-      plugins: [grapesjsmjml, grapesjspostcss, grapesjsmautic],
+      plugins: [grapesjsmjml, grapesjspostcss, grapesjsmautic, grapesjscomponentcodeeditor],
       pluginsOpts: {
         grapesjsmjml: {},
         grapesjsmautic: BuilderService.getMauticConf('email-mjml'),
@@ -195,13 +196,22 @@ export default class BuilderService {
       height: '100%',
       storageManager: false,
       assetManager: this.getAssetManagerConf(),
-      plugins: [grapesjsnewsletter, grapesjspostcss, grapesjsmautic],
+      plugins: [grapesjsnewsletter, grapesjspostcss, grapesjsmautic, grapesjscomponentcodeeditor],
       pluginsOpts: {
         grapesjsnewsletter: {},
         grapesjsmautic: BuilderService.getMauticConf('email-html'),
       },
     });
 
+    this.editor.Panels.addButton('views', [
+      {
+        id: 'open-code',
+        className: 'fa fa-coffee',
+        attributes: { title: 'Open Code' },
+        command: 'open-code',
+      },
+    ]);
+    
     // add a Mautic custom block Button
     this.editor.BlockManager.get('button').set({
       content:

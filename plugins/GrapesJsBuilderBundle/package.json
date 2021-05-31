@@ -26,6 +26,7 @@
   "homepage": "https://github.com/mautic/plugin-grapesjs-builder#readme",
   "dependencies": {
     "grapesjs": "^0.17.3",
+    "grapesjs-component-code-editor": "^1.0.16",
     "grapesjs-mjml": "^0.4.2",
     "grapesjs-parser-postcss": "^0.1.1",
     "grapesjs-preset-mautic": "github:mautic/grapesjs-preset-mautic#master",
