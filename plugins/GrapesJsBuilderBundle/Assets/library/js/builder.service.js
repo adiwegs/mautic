@@ -3,9 +3,13 @@ import grapesjsmjml from 'grapesjs-mjml';
 import grapesjsnewsletter from 'grapesjs-preset-newsletter';
 import grapesjswebpage from 'grapesjs-preset-webpage';
 import grapesjspostcss from 'grapesjs-parser-postcss';
+import {codeCommandFactory} from '@truenorthtechnology/grapesjs-code-editor';
 import grapesjsmautic from '../../../../../../grapesjs-preset-mautic/src';
 // import grapesjsmautic from 'grapesjs-preset-mautic';
 import ContentService from './content.service';
+
+console.log(codeCommandFactory);
+
 
 export default class BuilderService {
   editor;
@@ -194,6 +198,9 @@ export default class BuilderService {
       components: ContentService.getOriginalContent().body,
       height: '100%',
       storageManager: false,
+      commands: {
+        defaults: [codeCommandFactory()],
+      },
       assetManager: this.getAssetManagerConf(),
       plugins: [grapesjsnewsletter, grapesjspostcss, grapesjsmautic],
       pluginsOpts: {
@@ -201,6 +208,15 @@ export default class BuilderService {
         grapesjsmautic: BuilderService.getMauticConf('email-html'),
       },
     });
+
+    this.editor.Panels.addButton('views', [
+      {
+        id: 'open-code',
+        className: 'fa fa-coffee',
+        attributes: { title: 'Open Code' },
+        command: 'open-code',
+      },
+    ]);
 
     // add a Mautic custom block Button
     this.editor.BlockManager.get('button').set({
