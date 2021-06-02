@@ -1,10 +1,11 @@
 import BuilderService from './builder.service';
 import ContentService from './content.service';
 
-import '../../../node_modules/grapesjs/dist/css/grapes.min.css';
-// import '../../../node_modules/grapesjs-preset-webpage/dist/grapesjs-preset-webpage.min.css';
-// import '../../../node_modules/grapesjs-preset-newsletter/dist/grapesjs-preset-newsletter.css';
-import '../../../node_modules/grapesjs-component-code-editor/dist/grapesjs-component-code-editor.min.css';
+import 'grapesjs/dist/css/grapes.min.css';
+// import 'grapesjs-preset-webpage/dist/grapesjs-preset-webpage.min.css';
+// import 'grapesjs-preset-newsletter/dist/grapesjs-preset-newsletter.css';
+import 'grapesjs-component-code-editor/dist/grapesjs-component-code-editor.min.css';
+import './grapesjs-custom.css';
 
 /**
  * Launch builder

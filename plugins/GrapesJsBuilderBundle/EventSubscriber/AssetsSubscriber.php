@@ -42,7 +42,7 @@ class AssetsSubscriber implements EventSubscriberInterface
         }
         if ($this->config->isPublished()) {
             $assetsEvent->addScript('plugins/GrapesJsBuilderBundle/Assets/library/js/dist/builder.js');
-            $assetsEvent->addStylesheet('plugins/GrapesJsBuilderBundle/Assets/library/css/builder.css');
+            $assetsEvent->addStylesheet('plugins/GrapesJsBuilderBundle/Assets/library/js/dist/builder.css');
         }
     }
 }
