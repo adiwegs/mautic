@@ -137,6 +137,7 @@ export default class BuilderService {
    * Initialize the builder in the landingapge mode
    */
   initPage() {
+
     // Launch GrapesJS with body part
     this.editor = grapesjs.init({
       clearOnRender: true,
